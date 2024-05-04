@@ -17,13 +17,15 @@ while True:
         
         deposito = int(input("Insira o valor para deposito: "))
         
-        saldo += deposito
+        if deposito > 0:
+            saldo += deposito
+            
+            deposito_extrato = str(deposito)
+            extrato_depositos.append("R$" + deposito_extrato)
         
-        deposito_extrato = str(deposito)
-        extrato_depositos.append(deposito_extrato)
-    
+        else:
+            print("Operação inválida, favor inserir valores maior que 0")
     elif opcao == "s":
-        print("sacar")
         
         saque = int(input("Insira o valor desejado para saque: "))
         saque_extrato = str(saque)
@@ -32,12 +34,12 @@ while True:
             if saque > 500:
                 print("Valor ultrapassa limite de saque estipulado em R$500!")
             elif saque > saldo:
-                print(f"Valor ultrapassa limite disponível em conta. Saldo da conta atual é: R${saldo}")
+                print(f"Não foi possível realizar a operação devido a falta de saldo. Saldo da conta atual é: R${saldo}")
             else:
                 saldo -= saque
                 saques_feitos += 1
 
-                extrato_saques.append(saque_extrato)
+                extrato_saques.append("R$" + saque_extrato)
                 print(saques_feitos)
         else: 
             print("Você atingiu o limite de 3 saques diarios!!!")
